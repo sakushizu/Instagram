@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TimeLineViewController: UIViewController {
 
+    @IBOutlet weak var timelineScrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,4 +24,5 @@ class ViewController: UIViewController {
 
 
 }
+
 

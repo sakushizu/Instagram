@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0B1EF6071BB0FB66004CF789 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1EF6061BB0FB66004CF789 /* AppDelegate.swift */; };
-		0B1EF6091BB0FB66004CF789 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1EF6081BB0FB66004CF789 /* ViewController.swift */; };
+		0B1EF6091BB0FB66004CF789 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1EF6081BB0FB66004CF789 /* TimeLineViewController.swift */; };
 		0B1EF60C1BB0FB66004CF789 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B1EF60A1BB0FB66004CF789 /* Main.storyboard */; };
 		0B1EF60E1BB0FB66004CF789 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B1EF60D1BB0FB66004CF789 /* Images.xcassets */; };
 		0B1EF6111BB0FB66004CF789 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B1EF60F1BB0FB66004CF789 /* LaunchScreen.xib */; };
 		0B1EF61D1BB0FB66004CF789 /* InstagramAPPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1EF61C1BB0FB66004CF789 /* InstagramAPPTests.swift */; };
+		0BC47EF31BB6D85D00F83A45 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC47EF21BB6D85D00F83A45 /* CameraViewController.swift */; };
+		0BC47EF51BB6F53200F83A45 /* CustomTabBarrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC47EF41BB6F53200F83A45 /* CustomTabBarrController.swift */; };
+		0BC47F001BB7C76600F83A45 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BC47EFE1BB7C76600F83A45 /* camera.png */; };
+		0BC47F011BB7C76600F83A45 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BC47EFF1BB7C76600F83A45 /* home.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +33,17 @@
 		0B1EF6011BB0FB66004CF789 /* InstagramAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B1EF6051BB0FB66004CF789 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B1EF6061BB0FB66004CF789 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0B1EF6081BB0FB66004CF789 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0B1EF6081BB0FB66004CF789 /* TimeLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		0B1EF60B1BB0FB66004CF789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B1EF60D1BB0FB66004CF789 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0B1EF6101BB0FB66004CF789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0B1EF6161BB0FB66004CF789 /* InstagramAPPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramAPPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B1EF61B1BB0FB66004CF789 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B1EF61C1BB0FB66004CF789 /* InstagramAPPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAPPTests.swift; sourceTree = "<group>"; };
+		0BC47EF21BB6D85D00F83A45 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		0BC47EF41BB6F53200F83A45 /* CustomTabBarrController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarrController.swift; sourceTree = "<group>"; };
+		0BC47EFE1BB7C76600F83A45 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		0BC47EFF1BB7C76600F83A45 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +86,12 @@
 			isa = PBXGroup;
 			children = (
 				0B1EF6061BB0FB66004CF789 /* AppDelegate.swift */,
-				0B1EF6081BB0FB66004CF789 /* ViewController.swift */,
 				0B1EF60A1BB0FB66004CF789 /* Main.storyboard */,
+				0BC47EFE1BB7C76600F83A45 /* camera.png */,
+				0BC47EFF1BB7C76600F83A45 /* home.png */,
+				0B1EF6281BB0FBC7004CF789 /* Model */,
+				0B1EF6261BB0FBAE004CF789 /* View */,
+				0B1EF6271BB0FBBC004CF789 /* Controller */,
 				0B1EF60D1BB0FB66004CF789 /* Images.xcassets */,
 				0B1EF60F1BB0FB66004CF789 /* LaunchScreen.xib */,
 				0B1EF6041BB0FB66004CF789 /* Supporting Files */,
@@ -110,6 +122,30 @@
 				0B1EF61B1BB0FB66004CF789 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B1EF6261BB0FBAE004CF789 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0B1EF6271BB0FBBC004CF789 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0B1EF6081BB0FB66004CF789 /* TimeLineViewController.swift */,
+				0BC47EF21BB6D85D00F83A45 /* CameraViewController.swift */,
+				0BC47EF41BB6F53200F83A45 /* CustomTabBarrController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		0B1EF6281BB0FBC7004CF789 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B1EF60C1BB0FB66004CF789 /* Main.storyboard in Resources */,
+				0BC47F011BB7C76600F83A45 /* home.png in Resources */,
 				0B1EF6111BB0FB66004CF789 /* LaunchScreen.xib in Resources */,
+				0BC47F001BB7C76600F83A45 /* camera.png in Resources */,
 				0B1EF60E1BB0FB66004CF789 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,8 +250,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B1EF6091BB0FB66004CF789 /* ViewController.swift in Sources */,
+				0B1EF6091BB0FB66004CF789 /* TimeLineViewController.swift in Sources */,
+				0BC47EF51BB6F53200F83A45 /* CustomTabBarrController.swift in Sources */,
 				0B1EF6071BB0FB66004CF789 /* AppDelegate.swift in Sources */,
+				0BC47EF31BB6D85D00F83A45 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +449,7 @@
 				0B1EF6221BB0FB66004CF789 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B1EF6231BB0FB66004CF789 /* Build configuration list for PBXNativeTarget "InstagramAPPTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +458,7 @@
 				0B1EF6251BB0FB66004CF789 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
