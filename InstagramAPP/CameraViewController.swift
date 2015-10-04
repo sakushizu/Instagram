@@ -7,22 +7,35 @@
 //
 
 import UIKit
+import Photos
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var postImage: UIImageView!
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
         self.pickImageFromCamera()
         self.pickImageFromLibrary()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var leftBackBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedBackBtn")
+        self.navigationItem.setLeftBarButtonItems([leftBackBarButtonItem], animated: true)
+        
+        var rightBackBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedNextBtn")
+        self.navigationItem.setRightBarButtonItems([rightBackBarButtonItem], animated: true)
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
     // 写真を撮ってそれを選択
     func pickImageFromCamera() {
@@ -50,19 +63,25 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         if info[UIImagePickerControllerOriginalImage] != nil {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
             println(image)
+            self.postImage.image = image
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tappedBackBtn() {
+        self.pickImageFromCamera()
+        self.pickImageFromLibrary()
+        
     }
-    */
+    
+    func tappedNextBtn() {
+        performSegueWithIdentifier("postView",sender: self)
+        
+    }
+        
+        
 
+    
+    
+  
 }
