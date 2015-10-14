@@ -20,8 +20,8 @@ class CustomTabBarController: UITabBarController {
         let cameraImage = UIImage(named: "camera1")
         let homeImage = UIImage(named: "home")
         //tabberCOntrollerと紐付いてるviewControllerの取得
-        let firstViewController = self.viewControllers![0] as! UIViewController
-        let secondViewController = self.viewControllers![1] as! UIViewController
+        let firstViewController = self.viewControllers![0] 
+        let secondViewController = self.viewControllers![1] 
         //それぞれに画像を設定
         firstViewController.tabBarItem = UITabBarItem(title: "home", image: homeImage, selectedImage: homeImage)
         secondViewController.tabBarItem = UITabBarItem(title: "camera", image: cameraImage, selectedImage: cameraImage)

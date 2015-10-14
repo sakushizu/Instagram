@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var postImage: UIImageView!
     
     override func viewDidLoad() {
@@ -19,12 +19,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.pickImageFromCamera()
         self.pickImageFromLibrary()
         
-        var leftBackBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedBackBtn")
+        let leftBackBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedBackBtn")
         self.navigationItem.setLeftBarButtonItems([leftBackBarButtonItem], animated: true)
         
-        var rightBackBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedNextBtn")
+        let rightBackBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedNextBtn")
         self.navigationItem.setRightBarButtonItems([rightBackBarButtonItem], animated: true)
-        
         
     }
     
@@ -59,10 +58,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     
     // 写真を選択した時に呼ばれる
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if info[UIImagePickerControllerOriginalImage] != nil {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            println(image)
             self.postImage.image = image
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -76,12 +74,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func tappedNextBtn() {
         performSegueWithIdentifier("postView",sender: self)
-        
     }
-        
-        
-
-    
-    
-  
+    //画面遷移の時に画像を渡す
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "postView") {
+            let secondController: PostViewController = segue.destinationViewController as! PostViewController
+            if let postImage = self.postImage.image {
+                secondController.postViewImage = postImage
+            }
+        }
+    }
 }

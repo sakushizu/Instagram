@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Parse
 
-class TimeLineTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class TimeLineTableViewController: UITableViewController, PostManagerDelegate {
     
+    let postManager = PostManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +25,25 @@ class TimeLineTableViewController: UITableViewController, UITableViewDelegate, U
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationController?.navigationBar.barTintColor = pink
         title = "Instagram"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logout")
+        
+        postManager.delegate = self
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        postManager.fetchPosts()
+        
+        super.viewWillAppear(animated)
+        if PFUser.currentUser() == nil {
+            performSegueWithIdentifier("loginViewController", sender: self)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,19 +62,31 @@ class TimeLineTableViewController: UITableViewController, UITableViewDelegate, U
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 10
+        return postManager.posts.count
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PostTableViewCell", forIndexPath: indexPath) as! PostTableViewCell
-
+        let post = postManager.posts[indexPath.row]
+        cell.postImage.image = post.image
+        cell.postTitle.text = post.text
         return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 350
+    }
+    
+    //delegate
+    func didFinishedFetchPosts() {
+        tableView.reloadData()
+    }
+    
+    func logout() {
+        PFUser.logOut()
+        performSegueWithIdentifier("loginViewController", sender: self)
     }
     
 

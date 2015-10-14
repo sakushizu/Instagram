@@ -30,7 +30,6 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func setPostImage() {
-        self.postImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.postImage.layer.cornerRadius = 5.0
         self.postImage.clipsToBounds = true
     }

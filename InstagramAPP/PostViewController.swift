@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+
 
 class PostViewController: UIViewController, UITextViewDelegate {
 
@@ -15,6 +17,10 @@ class PostViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var shareBtn: UIButton!
     
     
+    //一時的に画像を入れる変数
+    var postViewImage: UIImage!
+    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         postText.layer.cornerRadius = 5
@@ -24,6 +30,10 @@ class PostViewController: UIViewController, UITextViewDelegate {
         self.view.addGestureRecognizer(tapGesture)
         
         shareBtn.layer.cornerRadius = 5
+        
+        self.postView.image = postViewImage
+        
+        self.view.addSubview(postView)
         
         
 
@@ -37,13 +47,29 @@ class PostViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func shareBtn(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if postText.text.isEmpty {
+            let alertController = UIAlertController(title: "ERROR", message: "text is empty!", preferredStyle: UIAlertControllerStyle.Alert)
+            let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            alertController.addAction(action)
+            presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            createNewPost()
+            postText.resignFirstResponder()
+//            self.dismissViewControllerAnimated(true, completion: nil)
+//            self.navigationController?.popViewControllerAnimated(true)
+//            self.navigationController?.popToRootViewControllerAnimated(true)
+            
+        }
     }
     
     func tapGesture(sender: UITapGestureRecognizer) {
         postText.resignFirstResponder()
     }
     
+    func createNewPost() {
+        let post = Post(text: postText.text!, image: postView.image!)
+        post.save()
+    }
 
     /*
     // MARK: - Navigation
@@ -56,3 +82,4 @@ class PostViewController: UIViewController, UITextViewDelegate {
     */
 
 }
+
