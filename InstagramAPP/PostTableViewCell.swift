@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import Parse
+
+@objc protocol PostTableViewCellDelegate {
+    func tappedCommentButton()
+}
+
 
 class PostTableViewCell: UITableViewCell {
+    
+    weak var customDelegate:PostTableViewCellDelegate?
 
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var postData: UILabel!
@@ -43,6 +51,8 @@ class PostTableViewCell: UITableViewCell {
     @IBAction func shareButton(sender: UIButton) {
     }
     @IBAction func commentButton(sender: UIButton) {
+        customDelegate?.tappedCommentButton()
+        
     }
     @IBAction func likeButton(sender: UIButton) {
     }

@@ -18,23 +18,44 @@ class PostManager: NSObject {
     var posts: [Post] = []
     weak var delegate: PostManagerDelegate?
     
-    func fetchPosts() {
+    func fetchPosts(callback: () -> Void) {
         let query = PFQuery(className: "Post")
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 self.posts = []
-                let posts = objects as? [PFObject]!
-                for post in posts! {
-                    let text      = post["text"] as! String
-                    let imageFile = post["image"] as! PFFile
+                let posts = objects as [PFObject]!
+                for object in posts! {
+                    let text      = object["text"] as! String
+                    let imageFile = object["image"] as! PFFile
                     let post = Post(text: text, image: nil)
                     self.posts.append(post)
-//                    self.posts.insert(post, atIndex: 0)
+                    callback()
+                    
                     imageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if error == nil {
                             post.image = UIImage(data: imageData!)
                             self.delegate?.didFinishedFetchPosts()
+                        }
+                    })
+                    
+                    let relation = object.relationForKey("user")
+                    relation.query()?.getFirstObjectInBackgroundWithBlock( {
+                        (object, error) in
+                        if let userObject = object as? PFUser {
+                            let user = User(name: userObject.username!, password: "")
+                            let userImageFile = userObject["image"] as! PFFile
+
+                            userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                                if error == nil {
+                                    user.image = UIImage(data: imageData!)
+                                    self.delegate?.didFinishedFetchPosts()
+                                    
+                                }
+                            })
+
+                            post.user = user                            
+                            callback()
                         }
                     })
                 }

@@ -13,15 +13,17 @@ class User: NSObject {
     
     var name: String
     var password: String
-    
-    
-    
     var image: UIImage?
     
     init(name: String, password: String, image: UIImage?) {
         self.name = name
         self.password = password
         self.image = image
+    }
+    
+    init(name: String, password: String) {
+        self.name = name
+        self.password = password
     }
     
     func signUp(callback: (message: String?) -> Void) {

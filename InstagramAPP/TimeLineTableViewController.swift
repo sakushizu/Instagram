@@ -9,9 +9,10 @@
 import UIKit
 import Parse
 
-class TimeLineTableViewController: UITableViewController, PostManagerDelegate {
+class TimeLineTableViewController: UITableViewController, PostManagerDelegate, PostTableViewCellDelegate {
     
     let postManager = PostManager.sharedInstance
+    var postCell: PostTableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,9 @@ class TimeLineTableViewController: UITableViewController, PostManagerDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        postManager.fetchPosts()
+        postManager.fetchPosts { () -> Void in
+            self.tableView.reloadData()
+        }
         
         super.viewWillAppear(animated)
         if PFUser.currentUser() == nil {
@@ -70,8 +73,13 @@ class TimeLineTableViewController: UITableViewController, PostManagerDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PostTableViewCell", forIndexPath: indexPath) as! PostTableViewCell
         let post = postManager.posts[indexPath.row]
+        print(indexPath.row)
         cell.postImage.image = post.image
         cell.postTitle.text = post.text
+        cell.userImage.image = post.user?.image
+        cell.userName.text = post.user?.name
+        cell.customDelegate = self
+        postCell = cell
         return cell
     }
     
@@ -89,6 +97,29 @@ class TimeLineTableViewController: UITableViewController, PostManagerDelegate {
         performSegueWithIdentifier("loginViewController", sender: self)
     }
     
+    func tappedCommentButton() {
+        self.performSegueWithIdentifier("showCommentViewController", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCommentViewController" {
+            let secondController:CommentViewController = segue.destinationViewController as! CommentViewController
+            if let image = postCell.userImage.image {
+                secondController.userImage = image
+            }
+            if let text = postCell.postTitle.text {
+                secondController.postText = text
+            }
+            if let name = postCell.userName.text {
+                secondController.userName = name
+            }
+            
+        }
+    }
+
+}
+
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -135,4 +166,4 @@ class TimeLineTableViewController: UITableViewController, PostManagerDelegate {
     }
     */
 
-}
+

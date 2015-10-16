@@ -30,7 +30,7 @@ extension UIImage {
         let imageData = UIImageJPEGRepresentation(resizedImage, 0.8)!
         return PFFile(name: "image.jpg", data: imageData)
     }
-    
+        
     //画像のデータサイズを変更
     func resizeImage(originalImage: UIImage, towidth width: CGFloat, andHeight height: CGFloat) -> UIImage {
         let newSize = CGSizeMake(width, height)
