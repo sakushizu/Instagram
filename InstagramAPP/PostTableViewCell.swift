@@ -10,12 +10,13 @@ import UIKit
 import Parse
 
 @objc protocol PostTableViewCellDelegate {
-    func tappedCommentButton()
+    func tappedCommentButton(post: Post)
 }
 
 
 class PostTableViewCell: UITableViewCell {
     
+    var post: Post!
     weak var customDelegate:PostTableViewCellDelegate?
 
     @IBOutlet weak var postImage: UIImageView!
@@ -23,6 +24,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var postTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,7 +32,7 @@ class PostTableViewCell: UITableViewCell {
         setPostImage()
         setUserImage()
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -50,10 +52,11 @@ class PostTableViewCell: UITableViewCell {
     
     @IBAction func shareButton(sender: UIButton) {
     }
+    
     @IBAction func commentButton(sender: UIButton) {
-        customDelegate?.tappedCommentButton()
-        
+        customDelegate?.tappedCommentButton(post)
     }
+    
     @IBAction func likeButton(sender: UIButton) {
     }
 }

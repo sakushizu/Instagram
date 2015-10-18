@@ -29,6 +29,7 @@ class PostManager: NSObject {
                     let text      = object["text"] as! String
                     let imageFile = object["image"] as! PFFile
                     let post = Post(text: text, image: nil)
+                    post.objectId = object.objectId
                     self.posts.append(post)
                     callback()
                     

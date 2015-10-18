@@ -1,3 +1,4 @@
+
 //
 //  CommentViewController.swift
 //  InstagramAPP
@@ -9,11 +10,16 @@
 import UIKit
 import Parse
 
-class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CommentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CommentManagerDelegate, UITextFieldDelegate {
+
+    var post: Post!
+    var commentText: String!
+//    var comment: Comment!
+    var commentedPost: CommentManager!
     
-    var userImage: UIImage!
-    var postText: String!
-    var userName: String!
+    let commentManager = CommentManager.sharedInstance
+    
+    @IBOutlet weak var textFieldScrollView: UIScrollView!
     
     @IBOutlet weak var commentTableView: UITableView!
     
@@ -26,11 +32,16 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         commentTableView.dataSource = self
         commentTableView.delegate = self
+        commentManager.delegate = self
+        commentTextField.delegate = self
+        
+        let tapRecgnizer = UITapGestureRecognizer(target: self, action: "tapGesture:")
+        self.view.addGestureRecognizer(tapRecgnizer)
         
         commentSendBtn.layer.cornerRadius = 5
-        
+
         //セルの高さを自動で計算
-        commentTableView.estimatedRowHeight = 78
+        commentTableView.estimatedRowHeight = 90
         commentTableView.rowHeight = UITableViewAutomaticDimension
 
         // Do any additional setup after loading the view.
@@ -39,6 +50,12 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        commentManager.fetchComments(post) { () -> Void in
+            self.commentTableView.reloadData()
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -50,7 +67,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         if section == 0 {
             return 1
         } else {
-            return 10
+            return commentManager.comments.count
         }
     }
     
@@ -63,31 +80,52 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         let dataLabel = cell.viewWithTag(3) as! UILabel
         let commentLabel = cell.viewWithTag(4) as! UILabel
         
+        
         if indexPath.section == 0 {
-            imageView.image = userImage
-            nameLabel.text = userName
-            commentLabel.text = postText
+            imageView.image = post.user?.image
+            nameLabel.text = post.user?.name
+            commentLabel.text = post.text
             
             
         } else {
-            
-            imageView.image = UIImage(named: "pinkritoru .jpg")
+            let comment = commentManager.comments[indexPath.row]
+    
+            imageView.image = comment.user.image
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.layer.cornerRadius = imageView.layer.bounds.width/2
             imageView.clipsToBounds = true
-            nameLabel.text = "sakura"
+            nameLabel.text = comment.user.name
             dataLabel.text = "54m"
-            commentLabel.text = "お腹すいたなああああああああああああああああああ"
+            commentLabel.text = comment.text
             commentLabel.numberOfLines = 0
         }
         return cell
-    }
-    
-    @IBAction func tapCommentSendBtn(sender: UIButton) {
         
     }
     
+    @IBAction func tapCommentSendBtn(sender: UIButton) {
+        let comment = Comment(text: commentTextField.text!, postId: post.objectId!)
+        comment.save { () in
+            self.commentTextField.text = ""
+            self.commentManager.fetchComments(self.post) { () -> Void in
+                self.commentTableView.reloadData()
+            }
+        }
+    }
     
+    //delegate
+    func didFinishedFetchComments() {
+        commentTableView.reloadData()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        commentTextField.resignFirstResponder()
+        return true
+    }
+    
+    func tapGesture(sender: UITapGestureRecognizer) {
+        commentTextField.resignFirstResponder()
+    }
     
 
     /*

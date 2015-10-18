@@ -25,6 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Parse.
         Parse.setApplicationId("ewnMhUt5LEJQacARWDIV52TUU6YN7HBr8syF6kF9",
             clientKey: "xh39eizcma2bADyVYefXoz6DBDtaoGQ1QI7kw1pj")
+
+        
+//        Get PFObject with objectId
+//        let query = PFQuery(className: "Post")
+//        query.getObjectInBackgroundWithId("W43iL2929w"){ (object, error) -> Void in
+//            let type = object.dynamicType
+//            print(type)
+//        }
+        
+        
+        
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)

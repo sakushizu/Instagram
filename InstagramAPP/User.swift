@@ -40,8 +40,6 @@ class User: NSObject {
                 print("sign up成功")
             }
         }
-        
-        print("\(name),\(password)")
     }
     
     func login(callback: (message: String?) -> Void) {

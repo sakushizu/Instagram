@@ -12,7 +12,7 @@ import Parse
 class TimeLineTableViewController: UITableViewController, PostManagerDelegate, PostTableViewCellDelegate {
     
     let postManager = PostManager.sharedInstance
-    var postCell: PostTableViewCell!
+    var selectedPost: Post!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,13 +73,12 @@ class TimeLineTableViewController: UITableViewController, PostManagerDelegate, P
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PostTableViewCell", forIndexPath: indexPath) as! PostTableViewCell
         let post = postManager.posts[indexPath.row]
-        print(indexPath.row)
+        cell.post = post
         cell.postImage.image = post.image
         cell.postTitle.text = post.text
         cell.userImage.image = post.user?.image
         cell.userName.text = post.user?.name
         cell.customDelegate = self
-        postCell = cell
         return cell
     }
     
@@ -97,23 +96,15 @@ class TimeLineTableViewController: UITableViewController, PostManagerDelegate, P
         performSegueWithIdentifier("loginViewController", sender: self)
     }
     
-    func tappedCommentButton() {
+    func tappedCommentButton(post: Post) {
+        selectedPost = post
         self.performSegueWithIdentifier("showCommentViewController", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCommentViewController" {
             let secondController:CommentViewController = segue.destinationViewController as! CommentViewController
-            if let image = postCell.userImage.image {
-                secondController.userImage = image
-            }
-            if let text = postCell.postTitle.text {
-                secondController.postText = text
-            }
-            if let name = postCell.userName.text {
-                secondController.userName = name
-            }
-            
+            secondController.post = selectedPost
         }
     }
 
