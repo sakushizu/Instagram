@@ -47,6 +47,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func shareBtn(sender: UIButton) {
+        
         if postText.text.isEmpty {
             let alertController = UIAlertController(title: "ERROR", message: "text is empty!", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
@@ -55,9 +56,6 @@ class PostViewController: UIViewController, UITextViewDelegate {
         } else {
             createNewPost()
             postText.resignFirstResponder()
-//            self.dismissViewControllerAnimated(true, completion: nil)
-//            self.navigationController?.popViewControllerAnimated(true)
-//            self.navigationController?.popToRootViewControllerAnimated(true)
             
         }
     }

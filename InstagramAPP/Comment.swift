@@ -10,6 +10,32 @@ import UIKit
 import Parse
 
 class Comment: NSObject {
+    var user: User!
+    var post: Post!
+    var postId: String
+    var text: String
+    
+    init(text: String, postId: String) {
+        self.text = text
+        self.postId = postId
+    }
+    
+    func save(callback: () -> Void) {
+        let commentObject = PFObject(className: "Comment")
+        commentObject["text"] = text
+        commentObject["postId"] = postId
+        commentObject["user"] = PFUser.currentUser()
+        
+//        let userRelation = commentObject.relationForKey("user")
+//        userRelation.addObject(PFUser.currentUser()!)
+//        PFUser.currentUser()
+        commentObject.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                print("コメント保存完了")
+                callback()
+            }
+        }
+    }
     
 
 }

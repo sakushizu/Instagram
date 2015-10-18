@@ -10,6 +10,7 @@ import UIKit
 import Parse
 
 class Post: NSObject {
+    var objectId: String!
     var text: String!
     var image: UIImage?
     var user: User?
@@ -18,7 +19,6 @@ class Post: NSObject {
         self.text = text
         self.image = image
     }
-    
     
     func save() {
         let postsObject = PFObject(className: "Post")

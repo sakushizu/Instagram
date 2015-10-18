@@ -39,6 +39,7 @@
 		0B89D9B81BC14249009F6A97 /* リトル・ミー.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0B89D9B71BC14249009F6A97 /* リトル・ミー.jpeg */; };
 		0B89D9BA1BC14342009F6A97 /* サクラダファミリア.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0B89D9B91BC14342009F6A97 /* サクラダファミリア.jpg */; };
 		0B89D9BC1BC14682009F6A97 /* pinkritoru .jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0B89D9BB1BC14682009F6A97 /* pinkritoru .jpg */; };
+		0BA8722C1BD16EBE0052492C /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8722B1BD16EBE0052492C /* CommentManager.swift */; settings = {ASSET_TAGS = (); }; };
 		0BC47EF31BB6D85D00F83A45 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC47EF21BB6D85D00F83A45 /* CameraViewController.swift */; };
 		0BC47EF51BB6F53200F83A45 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC47EF41BB6F53200F83A45 /* CustomTabBarController.swift */; };
 		0BE5F1721BCFB19900DA7FBB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE5F1711BCFB19900DA7FBB /* SignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -103,6 +104,7 @@
 		0B89D9B71BC14249009F6A97 /* リトル・ミー.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "リトル・ミー.jpeg"; sourceTree = "<group>"; };
 		0B89D9B91BC14342009F6A97 /* サクラダファミリア.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "サクラダファミリア.jpg"; sourceTree = "<group>"; };
 		0B89D9BB1BC14682009F6A97 /* pinkritoru .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pinkritoru .jpg"; sourceTree = "<group>"; };
+		0BA8722B1BD16EBE0052492C /* CommentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		0BC47EF21BB6D85D00F83A45 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		0BC47EF41BB6F53200F83A45 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0BE5F1711BCFB19900DA7FBB /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -186,7 +188,7 @@
 				0B278CC11BC3FBAE00C3C3DA /* Bolts.framework */,
 				0B278CC21BC3FBAE00C3C3DA /* Parse.framework */,
 				0B89D9B41BC14132009F6A97 /* imageFile */,
-				0B278CE71BC514E400C3C3DA /* Extenshion */,
+				0B278CE71BC514E400C3C3DA /* Extension */,
 				0B1EF6061BB0FB66004CF789 /* AppDelegate.swift */,
 				0B1EF60A1BB0FB66004CF789 /* Main.storyboard */,
 				0B1EF6281BB0FBC7004CF789 /* Model */,
@@ -227,6 +229,8 @@
 		0B1EF6261BB0FBAE004CF789 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0BEFD5281BBBCAF400A75C3E /* PostTableViewCell.swift */,
+				0BEFD5291BBBCAF400A75C3E /* PostTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -237,8 +241,6 @@
 				0BC47EF21BB6D85D00F83A45 /* CameraViewController.swift */,
 				0BC47EF41BB6F53200F83A45 /* CustomTabBarController.swift */,
 				0BEFD5261BBBC5B200A75C3E /* TimeLineTableViewController.swift */,
-				0BEFD5281BBBCAF400A75C3E /* PostTableViewCell.swift */,
-				0BEFD5291BBBCAF400A75C3E /* PostTableViewCell.xib */,
 				0B77B6581BBD920B00C6E78C /* PostViewController.swift */,
 				0B76EF511BCA22A500FF6A66 /* LoginViewController.swift */,
 				0BE5F1711BCFB19900DA7FBB /* SignUpViewController.swift */,
@@ -254,16 +256,17 @@
 				0B278C9E1BC3F8AB00C3C3DA /* User.swift */,
 				0B278CA01BC3F8B500C3C3DA /* Comment.swift */,
 				0B278CE51BC50D3800C3C3DA /* PostManager.swift */,
+				0BA8722B1BD16EBE0052492C /* CommentManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
 		};
-		0B278CE71BC514E400C3C3DA /* Extenshion */ = {
+		0B278CE71BC514E400C3C3DA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				0B278CE81BC5150D00C3C3DA /* NSDate+Extension.swift */,
 			);
-			name = Extenshion;
+			name = Extension;
 			sourceTree = "<group>";
 		};
 		0B89D9B41BC14132009F6A97 /* imageFile */ = {
@@ -406,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BA8722C1BD16EBE0052492C /* CommentManager.swift in Sources */,
 				0BE5F1741BCFB89C00DA7FBB /* CommentViewController.swift in Sources */,
 				0B76EF521BCA22A500FF6A66 /* LoginViewController.swift in Sources */,
 				0B278CE91BC5150D00C3C3DA /* NSDate+Extension.swift in Sources */,
