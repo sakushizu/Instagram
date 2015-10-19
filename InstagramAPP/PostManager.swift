@@ -21,6 +21,7 @@ class PostManager: NSObject {
     func fetchPosts(callback: () -> Void) {
         let query = PFQuery(className: "Post")
         query.orderByDescending("createdAt")
+        query.includeKey("user")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 self.posts = []
@@ -30,9 +31,6 @@ class PostManager: NSObject {
                     let imageFile = object["image"] as! PFFile
                     let post = Post(text: text, image: nil)
                     post.objectId = object.objectId
-                    self.posts.append(post)
-                    callback()
-                    
                     imageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if error == nil {
                             post.image = UIImage(data: imageData!)
@@ -40,25 +38,19 @@ class PostManager: NSObject {
                         }
                     })
                     
-                    let relation = object.relationForKey("user")
-                    relation.query()?.getFirstObjectInBackgroundWithBlock( {
-                        (object, error) in
-                        if let userObject = object as? PFUser {
-                            let user = User(name: userObject.username!, password: "")
-                            let userImageFile = userObject["image"] as! PFFile
-
-                            userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-                                if error == nil {
-                                    user.image = UIImage(data: imageData!)
-                                    self.delegate?.didFinishedFetchPosts()
-                                    
-                                }
-                            })
-
-                            post.user = user                            
-                            callback()
+                    let userObject = object["user"] as! PFUser
+                    let userName = userObject["username"] as! String
+                    let userImageFile = userObject["image"] as! PFFile
+                    let user = User(name: userName, password: "")
+                    userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                        if error == nil {
+                            user.image = UIImage(data: imageData!)
+                            self.delegate?.didFinishedFetchPosts()
                         }
                     })
+                    post.user = user
+                    self.posts.append(post)
+                    callback()
                 }
             }
         }

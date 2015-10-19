@@ -46,26 +46,6 @@ class CommentManager: NSObject {
                         comment.user = user
                         self.comments.append(comment)
                         callback()
-                        
-//                        let relation = object.relationForKey("user")
-//                        relation.query()?.getFirstObjectInBackgroundWithBlock( {
-//                            (object, error) in
-//                            if let userObject = object as? PFUser {
-//                                let user = User(name: userObject.username!, password: "")
-//                                let userImageFile = userObject["image"] as! PFFile
-//                                
-//                                userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
-//                                    if error == nil {
-//                                        user.image = UIImage(data: imageData!)
-//                                        self.delegate?.didFinishedFetchComments()
-//                                        
-//                                    }
-//                                })
-//                                
-//                                comment.user = user
-//                                callback()
-//                            }
-//                        })
                     }
                 }
             } else {

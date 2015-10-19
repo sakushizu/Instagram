@@ -24,8 +24,7 @@ class Post: NSObject {
         let postsObject = PFObject(className: "Post")
         postsObject["text"] = text
         postsObject["image"] = image!.createFileForm()
-        let relation = postsObject.relationForKey("user")
-        relation.addObject(PFUser.currentUser()!)
+        postsObject["user"] = PFUser.currentUser()
         postsObject.saveInBackgroundWithBlock { (success, error) in
             if success {
                 print("保存完了！")
