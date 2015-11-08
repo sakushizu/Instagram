@@ -9,6 +9,9 @@
 import UIKit
 import Parse
 
+@objc protocol PostViewControllerDelegate {
+    func reloadData()
+}
 
 class PostViewController: UIViewController, UITextViewDelegate {
 
@@ -16,6 +19,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var postText: UITextView!
     @IBOutlet weak var shareBtn: UIButton!
     
+    weak var customDelegate:PostViewControllerDelegate?
     
     //一時的に画像を入れる変数
     var postViewImage: UIImage!
@@ -65,8 +69,14 @@ class PostViewController: UIViewController, UITextViewDelegate {
     }
     
     func createNewPost() {
-        let post = Post(text: postText.text!, image: postView.image!)
-        post.save()
+        print("createNewPostBeggining")
+        let post = Post(objectId: "", text: postText.text!, image: postView.image!)
+        post.save { () in
+            print("createNewPostClosure")
+            print(self.customDelegate)
+            self.customDelegate?.reloadData()
+        }
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
     /*

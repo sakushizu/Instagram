@@ -12,19 +12,22 @@ class CustomTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //指定する色を定義
+        
         let pink = UIColor(red: 255 / 255, green: 214 / 255, blue: 204 / 255, alpha: 1.0)
+        let hotPink = UIColor(red: 232 / 255, green: 142 / 255, blue: 146 / 255, alpha: 1.0)
         //Tab Barの背景色を設定
         UITabBar.appearance().barTintColor = pink
+        UITabBar.appearance().tintColor = hotPink
         //tabberItemの画像
-        let cameraImage = UIImage(named: "camera1")
-        let homeImage = UIImage(named: "home")
+        let userImage = UIImage(named: "User Filled-32.png")
+        let homeImage = UIImage(named: "home.png")
         //tabberCOntrollerと紐付いてるviewControllerの取得
         let firstViewController = self.viewControllers![0] 
         let secondViewController = self.viewControllers![1] 
         //それぞれに画像を設定
         firstViewController.tabBarItem = UITabBarItem(title: "home", image: homeImage, selectedImage: homeImage)
-        secondViewController.tabBarItem = UITabBarItem(title: "camera", image: cameraImage, selectedImage: cameraImage)
+        secondViewController.tabBarItem = UITabBarItem(title: "my page", image: userImage, selectedImage: userImage)
+        
 
         // Do any additional setup after loading the view.
     }

@@ -10,18 +10,24 @@ import UIKit
 import Parse
 
 
-class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginNameText: UITextField!
     @IBOutlet weak var loginPasswordText: UITextField!
-
+    @IBOutlet weak var signUpButton: UIButton!
+    
+    let currentUser = CurrentUser.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loginPasswordText?.secureTextEntry = true
+        loginButton.layer.cornerRadius = 5
+        signUpButton.layer.cornerRadius = 5
         
-
+        loginNameText.delegate = self
+        loginPasswordText.delegate = self
+        
         // Do any additional setup after loading the view.
     }
 
@@ -32,7 +38,6 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
 
     
     //ログイン機能
-    
     @IBAction func loginButton(sender: UIButton) {
         if loginNameText.text!.isEmpty || loginPasswordText.text!.isEmpty {
             showAlert("User name or password is empty")
@@ -41,6 +46,7 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let user = User(name: loginNameText.text!, password: loginPasswordText.text!, image: nil)
         user.login { (message) in
             if message == nil {
+                print("login")
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 self.showAlert(message)
@@ -48,7 +54,10 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
     
-    
+    @IBAction func tappedSignUpButton(sender: UIButton) {
+        performSegueWithIdentifier("moveSignUpController", sender: self)
+    }
+
     //アラート表示のメソッド
     func showAlert(message: String?) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
@@ -56,6 +65,20 @@ class LoginViewController: UIViewController, UIImagePickerControllerDelegate, UI
         alertController.addAction(action)
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    //keyboardを閉じるdeligate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        loginNameText.resignFirstResponder()
+        loginPasswordText.resignFirstResponder()
+        return true
+    }
+    
+    func tapGesture(sender: UITapGestureRecognizer) {
+        loginNameText.resignFirstResponder()
+        loginPasswordText.resignFirstResponder()
+    }
+
+    
 
     /*
     // MARK: - Navigation

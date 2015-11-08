@@ -11,9 +11,19 @@ import Parse
 
 class User: NSObject {
     
+    var objectId: String?
     var name: String
-    var password: String
+    var password: String!
     var image: UIImage?
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    init(objectId: String, name: String) {
+        self.objectId = objectId
+        self.name = name
+    }
     
     init(name: String, password: String, image: UIImage?) {
         self.name = name
@@ -33,8 +43,7 @@ class User: NSObject {
         user["image"] = image!.createFileForm()
         user.signUpInBackgroundWithBlock { (success, error) -> Void in
             callback(message: error?.userInfo["error"] as? String)
-            if let unwrappedError = error {
-                print(unwrappedError.userInfo["error"] as? String)
+            if let _ = error {
                 print("sign up失敗")
             } else {
                 print("sign up成功")
@@ -44,8 +53,15 @@ class User: NSObject {
     
     func login(callback: (message: String?) -> Void) {
         PFUser.logInWithUsernameInBackground(self.name, password: self.password) { (user, error) -> Void in
-            if error == nil {
-                callback(message: nil)
+            if let PFCurrentUser = PFUser.currentUser() {
+                CurrentUser.sharedInstance.user = User(objectId: PFCurrentUser.objectId!, name: PFCurrentUser.username!)
+                let userImageFile = PFCurrentUser["image"] as! PFFile
+                userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                    if error == nil {
+                        CurrentUser.sharedInstance.user.image = UIImage(data: imageData!)
+                    }
+                })
+            callback(message: nil)
             } else {
                 callback(message: error?.userInfo["error"] as? String)
             }

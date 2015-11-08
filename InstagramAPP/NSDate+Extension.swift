@@ -20,7 +20,7 @@ extension UIImage {
     
     
     struct ImageSize {
-        static let height: CGFloat = 480
+        static let height: CGFloat = 600
     }
     
     //UIImageをPFFileに変換

@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var signUpBtn: UIButton!
@@ -23,6 +23,15 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.secureTextEntry = true
+        
+        nameText.delegate = self
+        passwordText.delegate = self
+        
+        loginBtn.layer.cornerRadius = 5
+        signUpBtn.layer.cornerRadius = 5
+        selectImageBtn.layer.cornerRadius = 5
+        profileImage.layer.cornerRadius = self.profileImage.layer.bounds.width/2
+        self.profileImage.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -32,13 +41,30 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
-    //サインップ機能
+    //buttonアクション
+    //icon画像選択
     @IBAction func tapSelectImageBtn(sender: UIButton) {
-        self.pickImageFromCamera()
-        self.pickImageFromLibrary()
+        //アクションシートを生成
+        let alertController = UIAlertController(title: "", message:
+            "prease select", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        //アクションシートの表示
+        self.presentViewController(alertController, animated: true, completion: nil)
+        let cameraAction = UIAlertAction(title: "take a photo", style: UIAlertActionStyle.Default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.pickImageFromCamera()
+        })
+        let libraryAction = UIAlertAction(title: "choose from library", style: UIAlertActionStyle.Default, handler:{
+            (action: UIAlertAction!) -> Void in
+            self.pickImageFromLibrary()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        //アクションシートにアクションの追加
+        alertController.addAction(cameraAction)
+        alertController.addAction(libraryAction)
+        alertController.addAction(cancelAction)
     }
     
-    
+    //サインアップ機能
     @IBAction func tapSignUpBtn(sender: UIButton) {
         let user = User(name: nameText.text!, password: passwordText.text!, image: profileImage.image)
         user.signUp { (message) in
@@ -52,6 +78,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    //login画面遷移
+    @IBAction func tappedLoginButton(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        performSegueWithIdentifier("moveLoginController", sender: self)
+    }
     
     //アラート表示のメソッド
     func showAlert(message: String?) {
@@ -94,6 +125,17 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             self.profileImage.image = image
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        nameText.resignFirstResponder()
+        passwordText.resignFirstResponder()
+        return true
+    }
+    
+    func tapGesture(sender: UITapGestureRecognizer) {
+        nameText.resignFirstResponder()
+        passwordText.resignFirstResponder()
     }
 }
 
