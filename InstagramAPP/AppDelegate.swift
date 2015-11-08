@@ -34,11 +34,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(type)
 //        }
         
-        
-        
+        if let PFCurrentUser = PFUser.currentUser() {
+            CurrentUser.sharedInstance.user = User(objectId: PFCurrentUser.objectId!, name: PFCurrentUser.username!)
+            let userImageFile = PFCurrentUser["image"] as! PFFile
+            userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
+                if error == nil {
+                    CurrentUser.sharedInstance.user.image = UIImage(data: imageData!)
+                }
+            })
+   
+        }
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+//        CurrentUser.sharedInstance.user = User(objectId: PFUser.currentUser()!.objectId!, name: PFUser.currentUser()!.username!)
+        
         return true
     }
 

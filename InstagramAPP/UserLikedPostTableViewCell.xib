@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="214" id="KGk-i7-Jjw" customClass="UserLikedPostTableViewCell" customModule="InstagramAPP" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="281"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="280"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="リトル・ミー.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="KE9-8o-9Hi">
+                        <rect key="frame" x="8" y="12" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="8Jt-4a-mKl"/>
+                            <constraint firstAttribute="height" constant="35" id="jKx-ZF-9Ye"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHR-sn-LMX">
+                        <rect key="frame" x="45" y="26" width="139" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="gUU-X1-a8V"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xae-0Z-Rsv">
+                        <rect key="frame" x="184" y="26" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="dxk-rU-ewP"/>
+                            <constraint firstAttribute="width" constant="100" id="wZK-q8-wiL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKo-8f-5C3">
+                        <rect key="frame" x="8" y="251" width="284" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="jNV-93-d6l"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="jNV-93-d6l"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="サクラダファミリア.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-jr-qoJ">
+                        <rect key="frame" x="10" y="49" width="284" height="200"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="200" id="zrp-0I-hx0"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="Xae-0Z-Rsv" secondAttribute="trailing" constant="8" id="163-cn-V13"/>
+                    <constraint firstItem="tY2-jr-qoJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="2js-3w-wUh"/>
+                    <constraint firstItem="GHR-sn-LMX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="BFN-RS-Zxt"/>
+                    <constraint firstItem="GHR-sn-LMX" firstAttribute="leading" secondItem="KE9-8o-9Hi" secondAttribute="trailing" constant="2" id="D0V-gR-gXo"/>
+                    <constraint firstItem="ZKo-8f-5C3" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="D5z-ub-xgA"/>
+                    <constraint firstItem="tY2-jr-qoJ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="2" id="EWt-PX-ecU"/>
+                    <constraint firstItem="ZKo-8f-5C3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="F2e-Ts-aaJ"/>
+                    <constraint firstItem="Xae-0Z-Rsv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="Oq3-N8-bIu"/>
+                    <constraint firstItem="Xae-0Z-Rsv" firstAttribute="leading" secondItem="GHR-sn-LMX" secondAttribute="trailing" id="Wu9-8f-atV"/>
+                    <constraint firstItem="KE9-8o-9Hi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="k1B-Zm-cgz"/>
+                    <constraint firstItem="KE9-8o-9Hi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="kbm-i3-bEY"/>
+                    <constraint firstItem="ZKo-8f-5C3" firstAttribute="top" secondItem="tY2-jr-qoJ" secondAttribute="bottom" constant="2" id="omi-aJ-sGn"/>
+                    <constraint firstItem="tY2-jr-qoJ" firstAttribute="top" secondItem="Xae-0Z-Rsv" secondAttribute="bottom" constant="2" id="qhC-YA-KpZ"/>
+                    <constraint firstItem="ZKo-8f-5C3" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="tdJ-kI-Fwc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="data" destination="Xae-0Z-Rsv" id="7fC-7F-Dbk"/>
+                <outlet property="postImageView" destination="tY2-jr-qoJ" id="uxl-Bt-G8v"/>
+                <outlet property="postTitle" destination="ZKo-8f-5C3" id="qz8-KX-tLS"/>
+                <outlet property="userImgeView" destination="KE9-8o-9Hi" id="kL2-qJ-7IR"/>
+                <outlet property="userName" destination="GHR-sn-LMX" id="xKy-1B-3UN"/>
+            </connections>
+            <point key="canvasLocation" x="448" y="399.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="サクラダファミリア.jpg" width="680" height="453"/>
+        <image name="リトル・ミー.jpeg" width="208" height="243"/>
+    </resources>
+</document>

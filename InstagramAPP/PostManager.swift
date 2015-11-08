@@ -24,20 +24,22 @@ class PostManager: NSObject {
         query.includeKey("user")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
-                self.posts = []
+//                self.posts = []
+                var tmpPosts: [Post] = []
                 let posts = objects as [PFObject]!
                 for object in posts! {
-                    let text      = object["text"] as! String
+                    let objectId = object.objectId!
+                    let text = object["text"] as! String
                     let imageFile = object["image"] as! PFFile
-                    let post = Post(text: text, image: nil)
-                    post.objectId = object.objectId
+                    let post = Post(objectId: objectId, text: text, image: nil)
+//                    post.objectId = object.objectId
                     imageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if error == nil {
                             post.image = UIImage(data: imageData!)
-                            self.delegate?.didFinishedFetchPosts()
+//                            self.delegate?.didFinishedFetchPosts()
                         }
                     })
-                    
+                    post.createdAt = object.createdAt
                     let userObject = object["user"] as! PFUser
                     let userName = userObject["username"] as! String
                     let userImageFile = userObject["image"] as! PFFile
@@ -45,17 +47,33 @@ class PostManager: NSObject {
                     userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if error == nil {
                             user.image = UIImage(data: imageData!)
-                            self.delegate?.didFinishedFetchPosts()
+//                            self.delegate?.didFinishedFetchPosts()
                         }
                     })
                     post.user = user
-                    self.posts.append(post)
-                    callback()
+                    
+                    //postにlikeしたusersの取得
+                    let usersArray = object.relationForKey("likedUser")
+                    usersArray.query()?.findObjectsInBackgroundWithBlock({ (usersArray: [PFObject]?, error) -> Void in
+                        if error == nil  {
+                            post.likesCount = usersArray!.count
+                            for userObject in usersArray! {
+                                if let likedUser = userObject as? PFUser {
+                                    let user = User(objectId: likedUser.objectId!, name: likedUser.username!)
+                                    post.likedUserArray.append(user)
+                                }
+                            }
+                            post.currentUserLiked = post.isLikedByCurrentUser()
+                            tmpPosts.append(post)
+                        }
+                        self.posts = tmpPosts
+                        callback()
+                    })
+                    
                 }
             }
         }
     }
-    
 }
 
 

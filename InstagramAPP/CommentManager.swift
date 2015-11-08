@@ -40,9 +40,12 @@ class CommentManager: NSObject {
                         userImageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                             if error == nil {
                                 user.image = UIImage(data: imageData!)
-                                self.delegate?.didFinishedFetchComments()
+                                CurrentUser.sharedInstance.user.image = UIImage(data: imageData!)
+                               self.delegate?.didFinishedFetchComments()
                             }
                         })
+                        
+                        comment.date = object.createdAt
                         comment.user = user
                         self.comments.append(comment)
                         callback()

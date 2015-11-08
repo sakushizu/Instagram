@@ -14,6 +14,7 @@ class Comment: NSObject {
     var post: Post!
     var postId: String
     var text: String
+    var date: NSDate!
     
     init(text: String, postId: String) {
         self.text = text
@@ -26,9 +27,6 @@ class Comment: NSObject {
         commentObject["postId"] = postId
         commentObject["user"] = PFUser.currentUser()
         
-//        let userRelation = commentObject.relationForKey("user")
-//        userRelation.addObject(PFUser.currentUser()!)
-//        PFUser.currentUser()
         commentObject.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 print("コメント保存完了")
