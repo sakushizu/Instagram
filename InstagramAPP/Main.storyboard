@@ -829,7 +829,7 @@
             </objects>
             <point key="canvasLocation" x="1427.5" y="-256.5"/>
         </scene>
-        <!--Instagram-->
+        <!--Sakuragram-->
         <scene sceneID="qYX-9g-elC">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="77J-sR-g4p" customClass="TimeLineTableViewController" customModule="InstagramAPP" customModuleProvider="target" sceneMemberID="viewController">
@@ -857,7 +857,7 @@
                             <outlet property="delegate" destination="77J-sR-g4p" id="TWk-6E-LUi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Instagram" id="bKe-Wi-7Q4">
+                    <navigationItem key="navigationItem" title="Sakuragram" id="bKe-Wi-7Q4">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="57A-mZ-r4e">
                             <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ar9-es-Up8">
                                 <rect key="frame" x="316" y="0.0" width="43" height="43"/>

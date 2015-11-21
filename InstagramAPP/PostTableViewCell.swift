@@ -108,10 +108,10 @@ class PostTableViewCell: UITableViewCell {
     
     func changeLikeImage(currentUserLiked: Bool) {
         if currentUserLiked {
-            let image = UIImage(named: "Hearts Filled-50.png")
+            let image = UIImage(named: "newHeartRed.jpg")
             likeButton.setImage(image, forState: .Normal)
         } else {
-            let image = UIImage(named: "Hearts-50.png")
+            let image = UIImage(named: "newHeartGray.jpg")
             likeButton.setImage(image, forState: .Normal)
         }
     }

@@ -104,11 +104,14 @@ class CurrentUser: NSObject {
         postQuery.whereKey("objectId", equalTo: post.objectId!)
         postQuery.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
-                object?.deleteInBackground()
-                self.fetchUserPosts({ () -> Void in
-                    callback()
+                object?.deleteInBackgroundWithBlock({ (sucsess, error) -> Void in
+                    if sucsess {
+                        callback()
+                        print("削除しました")
+                    }
                 })
-                print("削除しました")
+                
+               
             }
         }
     }

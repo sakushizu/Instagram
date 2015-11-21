@@ -56,6 +56,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func viewWillAppear(animated: Bool) {
+        CommentManager.sharedInstance.comments = []
         commentManager.fetchComments(post) { () -> Void in
             self.commentTableView.reloadData()
         }

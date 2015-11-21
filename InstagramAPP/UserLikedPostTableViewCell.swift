@@ -19,6 +19,8 @@ class UserLikedPostTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        userImgeView.layer.cornerRadius = userImgeView.layer.bounds.width/2
+        userImgeView.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

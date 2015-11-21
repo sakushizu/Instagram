@@ -26,7 +26,8 @@ class CommentManager: NSObject {
         commentQuery.includeKey("user")
         commentQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
-                self.comments = []
+//                self.comments = []
+                callback()
                 if objects!.count > 0 {
                     for object in (objects! as [PFObject]) {
                         let text = object["text"] as! String

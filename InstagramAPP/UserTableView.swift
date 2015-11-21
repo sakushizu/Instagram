@@ -28,6 +28,7 @@ class UserTableView: UITableView, UITableViewDelegate, UITableViewDataSource,UIG
         longPressRecognizer.delegate = self
         // tableViewにrecognizerを設定
         self.addGestureRecognizer(longPressRecognizer)
+        self.tableFooterView = UIView()
     }
     
     
@@ -80,7 +81,8 @@ class UserTableView: UITableView, UITableViewDelegate, UITableViewDataSource,UIG
                 }
                 else {
                     CurrentUser.sharedInstance.deletePost(selectPost, callback: { () -> Void in
-                        self.reloadData()
+                        CurrentUser.sharedInstance.userPosts.removeAtIndex(indexPath!.row)
+                        self.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
                     })
                     SweetAlert().showAlert("Deleted!", subTitle: "Your imaginary file has been deleted!", style: AlertStyle.Success)
                 }

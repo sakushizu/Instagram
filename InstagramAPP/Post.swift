@@ -17,7 +17,7 @@ class Post: NSObject {
     var createdAt: NSDate!
     var likedUserArray: [User] = []
     var likesCount:Int = 0
-    var currentUserLiked:Bool!
+    var currentUserLiked = false
     
     
     init(objectId: String,text: String, image: UIImage?) {

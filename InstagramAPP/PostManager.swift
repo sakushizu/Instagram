@@ -33,6 +33,8 @@ class PostManager: NSObject {
                     let imageFile = object["image"] as! PFFile
                     let post = Post(objectId: objectId, text: text, image: nil)
 //                    post.objectId = object.objectId
+                    
+                    
                     imageFile.getDataInBackgroundWithBlock({ (imageData, error) -> Void in
                         if error == nil {
                             post.image = UIImage(data: imageData!)
@@ -49,8 +51,10 @@ class PostManager: NSObject {
                             user.image = UIImage(data: imageData!)
 //                            self.delegate?.didFinishedFetchPosts()
                         }
+                        callback()
                     })
                     post.user = user
+                    tmpPosts.append(post)
                     
                     //postにlikeしたusersの取得
                     let usersArray = object.relationForKey("likedUser")
@@ -64,13 +68,14 @@ class PostManager: NSObject {
                                 }
                             }
                             post.currentUserLiked = post.isLikedByCurrentUser()
-                            tmpPosts.append(post)
+//                            tmpPosts.append(post)
                         }
-                        self.posts = tmpPosts
+//                        self.posts = tmpPosts
                         callback()
                     })
-                    
                 }
+                self.posts = tmpPosts
+                callback()
             }
         }
     }

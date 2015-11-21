@@ -237,6 +237,7 @@ public class SweetAlert: UIViewController {
         String?, action: ((isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
             self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: buttonColor,otherButtonTitle:
                 otherButtonTitle,otherButtonColor: UIColor.redColor())
+            //ここじゃないの？
             userAction = action
             return self
     }
@@ -507,8 +508,10 @@ class InfoAnimatedView: AnimatableView {
         colorAnimation.repeatCount = HUGE
         colorAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         colorAnimation.autoreverses = true
-        colorAnimation.fromValue = UIColor.colorFromRGB(0xF7D58B).CGColor
-        colorAnimation.toValue = UIColor.colorFromRGB(0xF2A665).CGColor
+        /////////////////////////
+        colorAnimation.fromValue = UIColor.colorFromRGB(0xffd6cc).CGColor
+        colorAnimation.toValue = UIColor.colorFromRGB(0xe88e92).CGColor
+        /////////////////////////
         circleLayer.addAnimation(colorAnimation, forKey: "strokeColor")
     }
 }
@@ -560,7 +563,9 @@ class SuccessAnimatedView: AnimatableView {
             0);
         outlineLayer.path = outlineCircle
         outlineLayer.fillColor = UIColor.clearColor().CGColor;
-        outlineLayer.strokeColor = UIColor(red: 232 / 255, green: 142 / 255, blue: 146 / 255, alpha: 1.0).CGColor;
+        ///////////////////
+        outlineLayer.strokeColor = UIColor(red: 255 / 255, green: 214 / 255, blue: 204 / 255, alpha: 1.0).CGColor;
+        //////////////////
         outlineLayer.lineCap = kCALineCapRound
         outlineLayer.lineWidth = 4;
         outlineLayer.opacity = 0.1

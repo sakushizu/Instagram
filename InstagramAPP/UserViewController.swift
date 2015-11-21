@@ -89,13 +89,13 @@ class UserViewController: UIViewController, UIScrollViewDelegate,UIGestureRecogn
         if x == 0 {
             let frame = CGRectMake(x, 0, self.view.frame.width, scrollView.frame.height)
             userTableView = UserTableView(frame: frame, style: UITableViewStyle.Plain)
-            userTableView.estimatedRowHeight = 270
+            userTableView.estimatedRowHeight = 286
             userTableView.rowHeight = UITableViewAutomaticDimension
             self.scrollView.addSubview(userTableView)
         } else {
             let frame = CGRectMake(x, 0, self.view.frame.width, scrollView.frame.height)
             userLikedPostTableView = UserLikedPostTableView(frame: frame, style: UITableViewStyle.Plain)
-            userLikedPostTableView.estimatedRowHeight = 280
+            userLikedPostTableView.estimatedRowHeight = 321
             userLikedPostTableView.rowHeight = UITableViewAutomaticDimension
             self.scrollView.addSubview(userLikedPostTableView)
         }
